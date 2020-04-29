@@ -14,7 +14,7 @@ var getPark = function() {
                         console.log(data.data.length);
                         
                         for (var i = 0; i < natParks.length; i++) {
-                            console.log("{'fullname': " + natParks[i].fullName + "', states: '" + natParks[i].states + "', parkCode: '" + natParks[i].parkCode + "', longitude: '" + natParks[i].longitude + "', latitude: '" + natParks[i].latitude + "'},");
+                            console.log("{'fullname': '" + natParks[i].fullName + "', 'states': '" + natParks[i].states + "', 'parkCode': '" + natParks[i].parkCode + "', 'longitude': '" + natParks[i].longitude + "', 'latitude': '" + natParks[i].latitude + "'},");
                         }
                     });
             }
