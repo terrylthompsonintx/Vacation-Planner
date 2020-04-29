@@ -1,6 +1,6 @@
 // Variables
-var parkURL = "https://developer.nps.gov/api/v1/parks?stateCode=tx&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo"
-var campgroundURL = "https://developer.nps.gov/api/v1/campgrounds?stateCode=tx&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo"
+var parkURL = "https://developer.nps.gov/api/v1/parks?parkCode=bibe&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo"
+var campgroundURL = "https://developer.nps.gov/api/v1/campgrounds?parkCode=bibe&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo"
 var natParks = [];
 
 
