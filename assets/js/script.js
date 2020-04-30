@@ -1,5 +1,5 @@
 // Variables
-var theState = "al";
+var theState = "wy";
 var parkURL = "https://developer.nps.gov/api/v1/parks?stateCode="+ theState +"&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo&limit=500"
 var campgroundURL = "https://developer.nps.gov/api/v1/campgrounds?parkCode=bibe&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo"
 var natParks = [];
@@ -45,4 +45,4 @@ var getPark = function() {
 }
 
 
-getPark();
+//getPark();
