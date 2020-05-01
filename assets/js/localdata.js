@@ -1,4 +1,5 @@
 var fullNameCode = [];
+var stateRadio = document.getElementById("state-modal");
 
 var parkList = [
    {'fullname': 'Birmingham Civil Rights National Monument', 'states': 'AL', 'parkCode': 'bicr', 'longitude': '-86.8146667480469', 'latitude': '33.5154266357422', 'postalCode': '0'},
@@ -717,14 +718,31 @@ var getStates = function() {
    theStates = theStates.sort();
    
    console.log(theStates.sort());
+   for (var i = 0; i < theStates.length; i++)
+   {
+      var theRadio = document.createElement("input");
+      theRadio.setAtribute("type", "radio");
+      theRadio.setAttribute("name", "state");
+      theRadio.setAttribute("id", theStates[i]);
+      theRadio.setAttribute("value", theState[i]);
+      var theLabel = document.createElement("label");
+      theLabel.setAttribute("for", theStates[i]);
+      theLabel.innerHTML = theStates[i]
+      stateRadio.append(theLabel);
+      stateRadio.append(theRadio);
+   }
 }
 
 var pullParksByState = function(state) {
    var theState = "CA";
+   var theList = [];
    for (var i = 0; i < parkList.length; i++) {
-      console.log(parkList[i].states);
-      if (parkList[i].states.indexOf(theState) == 1) {
+      //console.log(parkList[i].states);
+      if (parkList[i].states.indexOf(theState) != -1) {
          console.log(parkList[i]);
+         theList.push(parkList[i]);
+
+
       }
    }
 }
