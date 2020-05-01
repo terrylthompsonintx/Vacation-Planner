@@ -1,5 +1,6 @@
 var fullNameCode = [];
 var stateRadio = document.getElementById("state-modal");
+var parkModal = document.getElementById("park-modal");
 
 var parkList = [
    {'fullname': 'Birmingham Civil Rights National Monument', 'states': 'AL', 'parkCode': 'bicr', 'longitude': '-86.8146667480469', 'latitude': '33.5154266357422', 'postalCode': '0'},
@@ -717,7 +718,7 @@ var getStates = function() {
    var theStates = theArray.filter(distinct);
    theStates = theStates.sort();
    
-   console.log(theStates.sort());
+   //console.log(theStates.sort());
    for (var i = 0; i < theStates.length; i++)
    {
       var theRadio = document.createElement("input");
@@ -725,9 +726,11 @@ var getStates = function() {
       theRadio.setAttribute("name", "state");
       theRadio.setAttribute("id", theStates[i]);
       theRadio.setAttribute("value", theStates[i]);
+      theRadio.classList = "";
       var theLabel = document.createElement("label");
       theLabel.setAttribute("for", theStates[i]);
-      theLabel.innerHTML = theStates[i]
+      theLabel.innerHTML = theStates[i];
+      theLabel.classList = "";
       
       stateRadio.append(theRadio);
       stateRadio.append(theLabel);
@@ -740,15 +743,35 @@ var pullParksByState = function(state) {
    for (var i = 0; i < parkList.length; i++) {
       //console.log(parkList[i].states);
       if (parkList[i].states.indexOf(theState) != -1) {
-         console.log(parkList[i]);
-         theList.push(parkList[i]);
-
-
+         //console.log(parkList[i]);
+         //theList.push(parkList[i].parkCode + "*" + parkList[i].fullname);
+         theList.push(parkList[i].fullname + "*" + parkList[i].parkCode);
       }
+   }
+   //console.log(theParks);
+   var theParks = theList.filter(distinct);
+   theParks = theParks.sort();
+   //console.log(theParks);
+   for (var i = 0; i < theParks.length; i++) {
+      var splitParks = theParks[i].split("*");
+      
+      var theButton = document.createElement("input");
+      theButton.setAttribute("type", "button");
+      theButton.setAttribute("name", splitParks[1]);
+      theButton.setAttribute("value", splitParks[0]);
+      theButton.setAttribute("onClick", "getPark('" + splitParks[1] + "');");
+      theButton.innerHTML = splitParks[0];
+      theButton.classList = "";
+      parkModal.append(theButton);
+      var theBreak = document.createElement("br");
+      parkModal.append(theBreak);
+      
    }
 }
 
-
+var displayButton = function(button) {
+   console.log(button);
+}
 
 pullParksByState();
 //getFullNameParkCode();
