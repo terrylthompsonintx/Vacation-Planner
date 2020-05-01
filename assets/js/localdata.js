@@ -702,13 +702,35 @@ var getFullNameParkCode = function() {
    }
 }
 
-var getStates = function() {
-   var filteredArray = parkList.filter(function(item, pos){
-      return parkList.indexOf(item) == pos;
-   });
-
-   console.log(filteredArray);
+const distinct = (value, index, self) => {
+   return self.indexOf(value) === index;
 }
 
+var getStates = function() {
+   var theArray = [];
+   for (var i = 0; i < parkList.length; i++) {
+      if (parkList[i].states.length < 3) {
+         theArray.push(parkList[i].states);
+      }
+   }
+   var theStates = theArray.filter(distinct);
+   theStates = theStates.sort();
+   
+   console.log(theStates.sort());
+}
+
+var pullParksByState = function(state) {
+   var theState = "CA";
+   for (var i = 0; i < parkList.length; i++) {
+      console.log(parkList[i].states);
+      if (parkList[i].states.indexOf(theState) == 1) {
+         console.log(parkList[i]);
+      }
+   }
+}
+
+
+
+pullParksByState();
 //getFullNameParkCode();
 getStates();
