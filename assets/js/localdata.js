@@ -721,10 +721,10 @@ var getStates = function() {
    for (var i = 0; i < theStates.length; i++)
    {
       var theRadio = document.createElement("input");
-      theRadio.setAtribute("type", "radio");
+      theRadio.setAttribute("type", "radio");
       theRadio.setAttribute("name", "state");
       theRadio.setAttribute("id", theStates[i]);
-      theRadio.setAttribute("value", theState[i]);
+      theRadio.setAttribute("value", theStates[i]);
       var theLabel = document.createElement("label");
       theLabel.setAttribute("for", theStates[i]);
       theLabel.innerHTML = theStates[i]
