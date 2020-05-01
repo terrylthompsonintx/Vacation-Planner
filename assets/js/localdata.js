@@ -728,8 +728,9 @@ var getStates = function() {
       var theLabel = document.createElement("label");
       theLabel.setAttribute("for", theStates[i]);
       theLabel.innerHTML = theStates[i]
-      stateRadio.append(theLabel);
+      
       stateRadio.append(theRadio);
+      stateRadio.append(theLabel);
    }
 }
 
