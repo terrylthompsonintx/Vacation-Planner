@@ -28,13 +28,13 @@
 <!-- Row with drop down for search/modal-->
   <div class="grid-container">
     <div class="small-12 cell">
-      <button class="button" data-open="state-modal">Find Your Park</button>
+      <button class="button" data-open="state-modal" id="search-button">Find Your Park</button>
        
         <!-- First Modal -->
         <div class="reveal" id="state-modal" data-reveal>
           <h2>Select State</h2>
             <p class="lead">Info...</p>
-            <button class="button" data-open="park-modal">Next</button>
+            <button class="button" data-open="park-modal" id="narrow-data">Next</button>
             <button class="close-button" data-close aria-label="Close reveal" type="button">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -43,6 +43,8 @@
         <!-- Second Modal -->
         <div class="reveal" id="park-modal" data-reveal>
           <h2>Select Park</h2>
+          <p class="lead">Info...</p>
+          <button class="button" type="submit" id="data-submit">Submit</button>
           <button class="close-button" data-close aria-label="Close reveal" type="button">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -102,8 +104,7 @@
       <h4>
         <span>Alerts</span>
       </h4>
-      <div class="events-nest">
-              <p> <i class="fi-alert"></i> Number of Available Campsites Here
+      <div class="events-nest"> Alert Alert Alert Panic 
               <br>Monday <i class=".fi-asterisk"></i> May 5 2020
       </div>
   </div>
@@ -117,8 +118,11 @@
 
 <footer>
 </footer>
-    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+    
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.min.js"></script>
     <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/localdata.js"></script>
   </body>
 </html>
