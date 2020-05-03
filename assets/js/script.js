@@ -2,7 +2,8 @@ var todayTemp = document.querySelector('#temperature'); //icon of todays weather
 var todayConditions = document.querySelector('#conditions');//todays conditions
 var forecast = document.querySelector('#forecastDiv'); //forecast
 var todayImage = document.querySelector('#todayWeatherIcon');
-var zicodeCodeApiKey = 'ER1JvBo8933NgXERnX0IJPpGS60lJIriHRDGV44WIESEpX4kl3rP883BF0I1okww ';
+var weatherApiKey =  '7f0033f9d596986b6d7fb538906b12a7';
+
 //utility functions
 var clearDiv =function(targetDiv){
     targetDiv.innerHTML='';
@@ -69,18 +70,20 @@ var displayWeather  = function(weatherObj){
 }
 
 var fetchLatLon = function (zipC){
-    var zicodeCodeApiKey = 'ER1JvBo8933NgXERnX0IJPpGS60lJIriHRDGV44WIESEpX4kl3rP883BF0I1okww';
-    var zipCode = zipC.toString();
-    console.log(zipCode);
-    var zipurl = "https://www.zipcodeapi.com/rest/" + zicodeCodeApiKey + '/info.json/' + zipCode + '/degrees'; //<api_key>/info.<format>/<zip_code>/<units>
-    console.log(zipurl);
     
-    fetch(zipurl)
+
+    var endpointurl = "https://api.openweathermap.org/data/2.5/forecast?zip=" +zipC+"&appid="+weatherApiKey;
+
+    
+    fetch(endpointurl)
     .then(function(responce){ 
-	return responce.json();//once responce is recieved send it .json() method and pass to next
+	return responce.json();
     })
-    .then(function(myJson){
-	console.log(myJson);
+    .then(function(responce){
+        
+        var citylat =  responce.city.coord.lat;
+        var citylon =  responce.city.coord.lon;
+	fetchWeather(citylat, citylon);
     })
     .catch (function(error){
     console.log(error) 
@@ -88,11 +91,11 @@ var fetchLatLon = function (zipC){
 }
 
 var fetchWeather =function(lat, lon){
-    var weatherApiKey =  '7f0033f9d596986b6d7fb538906b12a7';
+    
     var parkLat =lat;
     var parkLon = lon;
     var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?";
-    var parkzip =zip;
+    
     var weatherQ = '';
     
     weatherQ = weatherApiUrl +'lat=' + parkLat + '&lon=' + parkLon + '&appid=' + weatherApiKey +'&units=imperial';
