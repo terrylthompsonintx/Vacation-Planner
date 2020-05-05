@@ -752,21 +752,22 @@ var pullParksByState = function(state) {
    var theState = state;
    var theList = [];
    for (var i = 0; i < parkList.length; i++) {
-      //console.log(parkList[i].states);
+      // check to see if the state exists in the list of states for big parks
       if (parkList[i].states.indexOf(theState) != -1) {
-         //console.log(parkList[i]);
-         //theList.push(parkList[i].parkCode + "*" + parkList[i].fullname);
+         // create an asterisk delimited array to hold the fullname and parkCode
          theList.push(parkList[i].fullname + "*" + parkList[i].parkCode);
       }
    }
-   //console.log(theParks);
+   // filter the parks by just that state and only return unique values
    var theParks = theList.filter(distinct);
+
+   // since the parks could be out of order, go ahead and sort them by the full name
    theParks = theParks.sort();
 
    var divParks = document.createElement("div");
    divParks.setAttribute("id", "parkList");
    parkModal.append(divParks);
-   //console.log(theParks);
+   // go through the list of parks and set up the buttons
    for (var i = 0; i < theParks.length; i++) {
       var splitParks = theParks[i].split("*");
       
