@@ -27,7 +27,7 @@ var getPark = function(parkCode) {
                         var theBody = document.getElementsByTagName("body");
                         //theBody.style = "background-image: linear-gradient(to right, rgba(80,133,165,0.5), rgba(80,133,165,0.8)), url(" + data.data[0].images[0].url + ") no-repeat center center fixed;";
                         $('body').css("background-image", "linear-gradient(to right, rgba(80,133,165,0.5), rgba(80,133,165,0.8)), url(" + data.data[0].images[0].url + ")");
-                        $('header').css("background-image", "linear-gradient(to right, rgba(80,133,165,0.5), rgba(80,133,165,0.8)), url(" + data.data[0].images[0].url + ")");
+                        //$('header').css("background-image", "linear-gradient(to right, rgba(80,133,165,0.5), rgba(80,133,165,0.8)), url(" + data.data[0].images[0].url + ")");
                         //var theHeader = document.getElementsByTagName("header");
                         //theHeader.style = "background-image: url(" + data.data[0].images[0].url +");";
                     });
