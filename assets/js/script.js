@@ -4,7 +4,7 @@ var forecast = document.querySelector('#forecastDiv'); //forecast
 var todayImage = document.querySelector('#todayWeatherIcon');
 var weatherApiKey =  '7f0033f9d596986b6d7fb538906b12a7';
 
-// add current day at top of calendar
+// add current day
 (function() {
     var now = moment().format('dddd, MMMM Do');
     var displayMoment = document.getElementById('currentDay');

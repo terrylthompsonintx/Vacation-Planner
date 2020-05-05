@@ -24,15 +24,17 @@ body {
     font-family: 'Roboto Condensed', sans-serif;;
 }
 
-.button {
+#choose-state {
     background-color: var(--quinary-color);
     border-radius: 10px;
     padding: 10px;
 }
 
-.forecast-box {
-    background-color: var(--quaternary-color);
-    opacity: .2;
+#search-button {
+    background-color: var(--quinary-color);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
 }
 
 .info-box {
@@ -52,6 +54,12 @@ body {
 
    }
 
-.today-box {
+#weather-container {
+    background-color: var(--primary-color);
     color: var(--seneary-color);
+    padding: 15px; 
+    width: 600px;   
+    border-radius: 25px; 
+    margin: 20px;
+    overflow-y: clip;
 }
