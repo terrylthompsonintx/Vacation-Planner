@@ -11,7 +11,8 @@ var displayCampGround =function(campObj){
     campGroundDiv.innerHTML='';
     if (campObj.data.length == 0){
         var noInfo = document.createElement('h4')
-        noInfo.innerText="No campground information available."
+        noInfo.innerText="No campground information available.";
+        campGroundDiv.appendChild(noInfo);
     }else {
         
         for (var i=0; i < campObj.data.length; i++){
@@ -89,8 +90,8 @@ var getPark = function(parkCode) {
                     });
             }
         });
-     
-   fetch(campgroundURL)
+   campgroundfetch = 'https://developer.nps.gov/api/v1/campgrounds?parkCode=' + parkCode + '&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo';
+   fetch(campgroundfetch)
         .then(function(response) {
            if (response.ok) {
               response.json()
