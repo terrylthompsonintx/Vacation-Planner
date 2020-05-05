@@ -8,14 +8,14 @@
 }
 
 header {
-    background-image: url("../images/yosemite.jpg");
+    /*background-image: url("../images/yosemite.jpg");*/
     color: var(--seneary-color);
     font-family: 'Roboto Condensed', sans-serif;
     background-image: linear-gradient(to right, rgba(80, 133, 165, 0.5), rgba(80, 133, 165, 0.8)), url("../images/yosemite.jpg");
 }
 
 body {
-    background-image: url("../images/yosemite.jpg") no-repeat center center fixed; 
+    /*background-image: url("../images/yosemite.jpg") no-repeat center center fixed;*/ 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -43,7 +43,6 @@ body {
     height: 125px;   
     border-radius: 25px; 
     margin: 20px;
+    overflow-x: scroll;
    }
-
-
 
