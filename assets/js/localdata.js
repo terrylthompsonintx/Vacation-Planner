@@ -762,13 +762,14 @@ var pullParksByState = function(state) {
    //console.log(theParks);
    var theParks = theList.filter(distinct);
    theParks = theParks.sort();
+
+   var divParks = document.createElement("div");
+   divParks.setAttribute("id", "parkList");
+   parkModal.append(divParks);
    //console.log(theParks);
    for (var i = 0; i < theParks.length; i++) {
       var splitParks = theParks[i].split("*");
       
-      var divParks = document.createElement("div");
-      divParks.setAttribute("id", "parkList");
-      parkModal.append(divParks);
       var theButton = document.createElement("input");
       theButton.setAttribute("type", "button");
       theButton.setAttribute("name", splitParks[1]);

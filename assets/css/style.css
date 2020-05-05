@@ -11,7 +11,8 @@ header {
     /*background-image: url("../images/yosemite.jpg");*/
     color: var(--seneary-color);
     font-family: 'Roboto Condensed', sans-serif;
-    background-image: linear-gradient(to right, rgba(80, 133, 165, 0.5), rgba(80, 133, 165, 0.8)), url("../images/yosemite.jpg");
+    /*background-size: cover;
+    background-image: linear-gradient(to right, rgba(80, 133, 165, 0.5), rgba(80, 133, 165, 0.8)), url("../images/yosemite.jpg");*/
 }
 
 body {

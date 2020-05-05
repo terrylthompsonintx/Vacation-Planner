@@ -10,8 +10,11 @@ var chosenState = document.getElementsByName("state");
 var getPark = function(parkCode) {
     var parkURL = "https://developer.nps.gov/api/v1/parks?parkCode="+ parkCode +"&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo&limit=500";
 
+    // force the park list closed
     $('#park-modal').foundation('close');
 
+    // clear out the list of parks on next pull
+    clearCurrent();
 
     
     fetch(parkURL)
@@ -22,8 +25,9 @@ var getPark = function(parkCode) {
                         natParks = data.data;
                         console.log(data.data[0].images[0].url);
                         var theBody = document.getElementsByTagName("body");
-                        //theBody.style = "background-image: url(" + data.data[0].images[0].url + ") no-repeat center center fixed;";
-                        $('body').css("background-image", "url(" + data.data[0].images[0].url + ")");
+                        //theBody.style = "background-image: linear-gradient(to right, rgba(80,133,165,0.5), rgba(80,133,165,0.8)), url(" + data.data[0].images[0].url + ") no-repeat center center fixed;";
+                        $('body').css("background-image", "linear-gradient(to right, rgba(80,133,165,0.5), rgba(80,133,165,0.8)), url(" + data.data[0].images[0].url + ")");
+                        $('header').css("background-image", "linear-gradient(to right, rgba(80,133,165,0.5), rgba(80,133,165,0.8)), url(" + data.data[0].images[0].url + ")");
                         //var theHeader = document.getElementsByTagName("header");
                         //theHeader.style = "background-image: url(" + data.data[0].images[0].url +");";
                     });
