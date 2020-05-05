@@ -26,6 +26,8 @@ body {
 
 .button {
     background-color: var(--quinary-color);
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .forecast-box {
@@ -41,10 +43,15 @@ body {
     height: 125px;   
     border-radius: 25px; 
     margin: 20px;
+
     overflow-y: scroll;
    }
 
    .campUl {
     list-style: none;
+
    }
 
+.today-box {
+    color: var(--seneary-color);
+}
