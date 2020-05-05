@@ -43,7 +43,13 @@ body {
     height: 125px;   
     border-radius: 25px; 
     margin: 20px;
-    overflow-x: scroll;
+
+    overflow-y: scroll;
+   }
+
+   .campUl {
+    list-style: none;
+
    }
 
 .today-box {
