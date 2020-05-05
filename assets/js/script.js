@@ -13,6 +13,9 @@ var getPark = function(parkCode) {
     // force the park list closed
     $('#park-modal').foundation('close');
 
+    // before we get the park info, start the pull for the weather
+    checkLatLon(parkCode);
+
     // clear out the list of parks on next pull
     clearCurrent();
 
@@ -65,6 +68,7 @@ var getPark = function(parkCode) {
 
 
 var stateModalHandler = function(event) {
+
     // cycle through all of the states and ...
     for (var i = 0; i < chosenState.length; i++) {
         // find out which one is maked and then...

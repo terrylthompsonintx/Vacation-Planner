@@ -784,6 +784,31 @@ var pullParksByState = function(state) {
    }
 }
 
+//  create a search function to loop through the array to pull back the park object
+var search = function(parkKey, parkList) {
+   for (var i = 0; i < parkList.length; i++) {
+      if (parkList[i].parkCode === parkKey) {
+         return parkList[i].parkCode;
+      }
+   }
+}
+
+// function to check to see if the lat/lon exists on our local file
+var checkLatLon = function(parkCode) {
+   // see if we can get the indexOf
+   //console.log("Can we see it? = " + search("bibe", parkList));
+   var thePark = search(parkCode, parkList);
+   var theLat = thePark.latitude;
+   var theLon = thePark.longitude;
+   var theZip = thePark.postalCode;
+   if (theLat === "" || theLon === "") {
+      fetchLatLon(theZip);
+   } else {
+      fetchWeather(theLat, theLon);
+   }
+}
+
+// this clears the id = parkList on the HTML page
 var clearCurrent = function() {
    $("#parkList").empty();
  }
