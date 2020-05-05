@@ -4,6 +4,15 @@ var forecast = document.querySelector('#forecastDiv'); //forecast
 var todayImage = document.querySelector('#todayWeatherIcon');
 var weatherApiKey =  '7f0033f9d596986b6d7fb538906b12a7';
 
+// add current day at top of calendar
+(function() {
+    var now = moment().format('dddd, MMMM Do');
+    var displayMoment = document.getElementById('currentDay');
+    displayMoment.innerHTML = now;
+  
+    console.log(now);
+  })();
+
 //utility functions
 var clearDiv =function(targetDiv){
     targetDiv.innerHTML='';
@@ -115,42 +124,45 @@ var fetchWeather =function(lat, lon){
 
 $(document).foundation();
 // Variables
-var theState = "wy";
-var parkURL = "https://developer.nps.gov/api/v1/parks?stateCode="+ theState +"&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo&limit=500"
 var campgroundURL = "https://developer.nps.gov/api/v1/campgrounds?parkCode=bibe&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo"
 var natParks = [];
 var writeLine = "";
 var eventEl = document.getElementById("info-box-activities");
+var stateModal = document.getElementById("choose-state");
+var chosenState = document.getElementsByName("state");
 
 
 var getPark = function(parkCode) {
-    var parkURL = "https://developer.nps.gov/api/v1/parks?parkCode="+ parkCode +"&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo&limit=500"
+    var parkURL = "https://developer.nps.gov/api/v1/parks?parkCode="+ parkCode +"&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo&limit=500";
+
+    $('#park-modal').foundation('close');
+    
     fetch(parkURL)
         .then(function(response) {
             if (response.ok) {
                 response.json()
                     .then(function(data) {
                         natParks = data.data;
-                        console.log(data.data.length);
+                        console.log(data.data[0].images[0].url);
+                        var theBody = document.getElementsByTagName("body");
+                        //theBody.style = "background-image: url(" + data.data[0].images[0].url + ") no-repeat center center fixed;";
+                        $('body').css("background-image", "url(" + data.data[0].images[0].url + ")");
+                        //var theHeader = document.getElementsByTagName("header");
+                        //theHeader.style = "background-image: url(" + data.data[0].images[0].url +");";
+                    });
+            }
+        });
+        
 
-                        
-                        
-                        for (var i = 0; i < natParks.length; i++) {
-                            
-                            writeLine = "{'fullname': '" + natParks[i].fullName + "', 'states': '" + natParks[i].states + "', 'parkCode': '" + natParks[i].parkCode + "', 'longitude': '" + natParks[i].longitude + "', 'latitude': '" + natParks[i].latitude + "', 'postalCode': '";
-                            if (natParks[i].addresses.length === 0) {
-                                writeLine += natParks[i].addresses.length;//natParks[i].addresses;
-                            } else {
-                                writeLine += natParks[i].addresses[0].postalCode;
-                            }
-                            writeLine +=  "'},";
-                            console.log(writeLine);
-                            var eventDiv = document.createElement("div");
-                            eventDiv.classList = "events-nest";
-                            eventEl.append(eventDiv);
-                            var eventP = document.createElement("p");
-                            eventP.textContent = writeLine;
-                            eventDiv.append(eventP);
+    var eventURL = "https://developer.nps.gov/api/v1/events?ParkCode=" + parkCode + "&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo";
+    fetch(eventURL)
+        .then(function(response) {
+            if (response.ok) {
+                response.json()
+                    .then(function(data) {
+                        console.log(data.total);
+                        if (data.total === '0') {
+                            document.querySelector(".fi-mountains").innerHTML = "There are no events planned at this time."
                         }
                     });
             }
@@ -169,4 +181,19 @@ var getPark = function(parkCode) {
 }
 
 
+
+
+var stateModalHandler = function(event) {
+    // cycle through all of the states and ...
+    for (var i = 0; i < chosenState.length; i++) {
+        // find out which one is maked and then...
+        if (chosenState[i].checked) {
+            // run the pullParksByState routine to populate the next modal
+            pullParksByState(chosenState[i].value);
+        }
+    }
+}
+
 //getPark();
+// listen to the 'Next' button on the stateModal form and fire stateModalHandler
+stateModal.addEventListener("click", stateModalHandler);
