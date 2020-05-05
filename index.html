@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Vacation Planner</title>
+
+    <title>National Park Trip Planner</title>
+
     <link rel="stylesheet" href="assets/css/foundation-icons/foundation-icons.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-float.min.css" integrity="sha256-4ldVyEvC86/kae2IBWw+eJrTiwNEbUUTmN0zkP4luL4=" crossorigin="anonymous">
@@ -28,12 +30,13 @@
 <!-- Row with drop down for search/modal-->
   <div class="grid-container">
     <div class="small-12 cell">
-      <button class="button" data-open="state-modal">Find Your Park</button>
+      <button class="button" data-open="state-modal" id="search-button">Find Your Park</button>
        
         <!-- First Modal -->
         <div class="reveal" id="state-modal" data-reveal>
           <h2>Select State</h2>
             <p class="lead">Info...</p>
+
             <button class="button" data-open="park-modal">Next</button>
             <button class="close-button" data-close aria-label="Close reveal" type="button">
               <span aria-hidden="true">&times;</span>
@@ -69,6 +72,46 @@
             Forecast
           </h4>
           <div id='forecastDiv'></div>
+
+            <button class="button" data-open="park-modal" id="narrow-data">Next</button>
+            <button class="close-button" data-close aria-label="Close reveal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <!-- Second Modal -->
+        <div class="reveal" id="park-modal" data-reveal>
+          <h2>Select Park</h2>
+          <p class="lead">Info...</p>
+          <button class="button" type="submit" id="data-submit">Submit</button>
+          <button class="close-button" data-close aria-label="Close reveal" type="button">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        </div>
+      </div>
+    </div>
+  <div class="large-6 columns">
+    <!--- Left side of page with search option and todays weather and forecast at bottom-->      
+      <div class="large-6 columns">
+        <div class="today-box" data-position="bottom" data-alignment="left">
+          <h4>
+            <span>Today's Weather</span>
+          </h4>
+          <div class="weather-img" id="todayWeatherIcon"></div>
+          <div class="weather"></div>
+            <span id="temperature"></span>
+            <span id="conditions"></span>
+        </div>
+      </div>
+      <div class="large-6 columns">
+        <div class="forecast-box">
+          <h4>
+            Forecast
+          </h4>
+          <div id="forecastDiv">
+
+          </div>
         </div>
       </div>
   </div>
@@ -103,8 +146,7 @@
       <h4>
         <span>Alerts</span>
       </h4>
-      <div class="events-nest">
-              <p> <i class="fi-alert"></i> Number of Available Campsites Here
+      <div class="events-nest"> Alert Alert Alert Panic 
               <br>Monday <i class=".fi-asterisk"></i> May 5 2020
       </div>
   </div>
@@ -119,9 +161,11 @@
 <footer>
 
 </footer>
+    
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.min.js"></script>
     <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/localdata.js"></script>
   </body>
 </html>
