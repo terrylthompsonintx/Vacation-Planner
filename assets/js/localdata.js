@@ -748,7 +748,7 @@ var getStates = function() {
 
 var pullParksByState = function(state) {
    // clear the list of parks from the secondary modal
-   clearCurrent();
+   clearCurrent("#parkList");
    var theState = state;
    var theList = [];
    for (var i = 0; i < parkList.length; i++) {
@@ -789,19 +789,18 @@ var pullParksByState = function(state) {
 var search = function(parkKey, parkList) {
    for (var i = 0; i < parkList.length; i++) {
       if (parkList[i].parkCode === parkKey) {
-         return parkList[i].parkCode;
+         return parkList[i];
       }
    }
 }
 
 // function to check to see if the lat/lon exists on our local file
 var checkLatLon = function(parkCode) {
-   // see if we can get the indexOf
-   //console.log("Can we see it? = " + search("bibe", parkList));
    var thePark = search(parkCode, parkList);
    var theLat = thePark.latitude;
    var theLon = thePark.longitude;
    var theZip = thePark.postalCode;
+
    if (theLat === "" || theLon === "") {
       fetchLatLon(theZip);
    } else {
@@ -810,8 +809,13 @@ var checkLatLon = function(parkCode) {
 }
 
 // this clears the id = parkList on the HTML page
-var clearCurrent = function() {
-   $("#parkList").empty();
+var clearCurrent = function(div) {
+   $(div).empty();
+ }
+
+ var removeElement = function(elementID) {
+    var element = document.getElementById(elementID);
+    element.parentNode.removeChild(element);
  }
 
 //pullParksByState();
