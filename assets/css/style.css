@@ -1,52 +1,48 @@
-  
 :root {
-    --primary-color: #5085A5;
-    --secondary-color: #31708E;
-    --tertiary-color: #CEBC81;
-    --quaternary-color: #687864;
-    --quinary-color: #8FC1E3;
-    --seneary-color: #F7F9FB;
-    }
-    
-    header {
-        /*background-image: url("../images/yosemite.jpg");*/
-        color: var(--seneary-color);
-        font-family: 'Roboto Condensed', sans-serif;
-        background-image: linear-gradient(to right, rgba(80, 133, 165, 0.5), rgba(80, 133, 165, 0.8)), url("../images/yosemite.jpg");
-    }
-    
-    body {
-        /*background-image: url("../images/yosemite.jpg") no-repeat center center fixed;*/ 
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        background-image: linear-gradient(to right, rgba(80, 133, 165, 0.5), rgba(80, 133, 165, 0.8)), url("../images/yosemite.jpg");
-        font-family: 'Roboto Condensed', sans-serif;;
-    }
-    
-    .button {
-        background-color: var(--quinary-color);
-        border-radius: 10px;
-        padding: 10px;
-    }
-    
-    .forecast-box {
-        background-color: var(--quaternary-color);
-        opacity: .2;
-    }
-    
-    .info-box {
-        background-color: var(--tertiary-color);
-        color: var(--seneary-color);
-        padding: 15px; 
-        width: 500px;
-        height: 125px;   
-        border-radius: 25px; 
-        margin: 20px;
-        overflow-x: scroll;
-       }
-    
-    .today-box {
-        color: var(--seneary-color);
-    }
+--primary-color: #5085A5;
+--secondary-color: #31708E;
+--tertiary-color: #CEBC81;
+--quaternary-color: #687864;
+--quinary-color: #8FC1E3;
+--seneary-color: #F7F9FB;
+}
+
+header {
+    /*background-image: url("../images/yosemite.jpg");*/
+    color: var(--seneary-color);
+    font-family: 'Roboto Condensed', sans-serif;
+    background-image: linear-gradient(to right, rgba(80, 133, 165, 0.5), rgba(80, 133, 165, 0.8)), url("../images/yosemite.jpg");
+}
+
+body {
+    /*background-image: url("../images/yosemite.jpg") no-repeat center center fixed;*/ 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-image: linear-gradient(to right, rgba(80, 133, 165, 0.5), rgba(80, 133, 165, 0.8)), url("../images/yosemite.jpg");
+    font-family: 'Roboto Condensed', sans-serif;;
+}
+
+.button {
+    background-color: var(--quinary-color);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.forecast-box {
+    background-color: var(--quaternary-color);
+    opacity: .2;
+}
+
+.info-box {
+    background-color: var(--tertiary-color);
+    color: var(--seneary-color);
+    padding: 15px; 
+    width: 500px;
+    height: 125px;   
+    border-radius: 25px; 
+    margin: 20px;
+    overflow-x: scroll;
+   }
+
