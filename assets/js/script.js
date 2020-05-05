@@ -123,6 +123,7 @@ var fetchWeather =function(lat, lon){
 }
 
 $(document).foundation();
+
 // Variables
 var campgroundURL = "https://developer.nps.gov/api/v1/campgrounds?parkCode=bibe&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo"
 var natParks = [];
@@ -130,6 +131,7 @@ var writeLine = "";
 var eventEl = document.getElementById("info-box-activities");
 var stateModal = document.getElementById("choose-state");
 var chosenState = document.getElementsByName("state");
+var divRightSide = document.getElementById("right-side");
 
 
 var getPark = function(parkCode) {
@@ -153,11 +155,23 @@ var getPark = function(parkCode) {
                         natParks = data.data;
                         console.log(data.data[0].images[0].url);
                         var theBody = document.getElementsByTagName("body");
-                        //theBody.style = "background-image: linear-gradient(to right, rgba(80,133,165,0.5), rgba(80,133,165,0.8)), url(" + data.data[0].images[0].url + ") no-repeat center center fixed;";
+                        // use one of the supplied background images to display a picture of the park
                         $('body').css("background-image", "linear-gradient(to right, rgba(80,133,165,0.5), rgba(80,133,165,0.8)), url(" + data.data[0].images[0].url + ")");
-                        //$('header').css("background-image", "linear-gradient(to right, rgba(80,133,165,0.5), rgba(80,133,165,0.8)), url(" + data.data[0].images[0].url + ")");
-                        //var theHeader = document.getElementsByTagName("header");
-                        //theHeader.style = "background-image: url(" + data.data[0].images[0].url +");";
+
+                        // use the natParks object to create an entry and display a list of activities
+                        var divToDos = document.createElement("div");
+                        divToDos.setAttribute("id","info-box-todos");
+                        divToDos.classList = "info-box";
+                        divRightSide.append(divToDos);
+                        var h4ElToDo = document.createElement("h4");
+                        divToDos.append(h4ElToDo);
+                        var spanToDo = document.createElement("span");
+                        spanToDo.innerHTML = "Things To Do";
+                        h4ElToDo.append(spanToDo);
+                        var nestTodo = document.createElement("div");
+                        nestTodo.id = "todos";
+                        nestTodo.classList = "events-nest";
+                        
                     });
             }
         });
