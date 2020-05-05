@@ -11,6 +11,8 @@ var getPark = function(parkCode) {
     var parkURL = "https://developer.nps.gov/api/v1/parks?parkCode="+ parkCode +"&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo&limit=500";
 
     $('#park-modal').foundation('close');
+
+
     
     fetch(parkURL)
         .then(function(response) {
