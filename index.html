@@ -4,13 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>National Park Trip Planner</title>
+
     <link rel="stylesheet" href="assets/css/foundation-icons/foundation-icons.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-float.min.css" integrity="sha256-4ldVyEvC86/kae2IBWw+eJrTiwNEbUUTmN0zkP4luL4=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.1.1/motion-ui.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
@@ -35,6 +36,43 @@
         <div class="reveal" id="state-modal" data-reveal>
           <h2>Select State</h2>
             <p class="lead">Info...</p>
+
+            <button class="button" data-open="park-modal">Next</button>
+            <button class="close-button" data-close aria-label="Close reveal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <!-- Second Modal -->
+        <div class="reveal" id="park-modal" data-reveal>
+          <h2>Select Park</h2>
+          <button class="close-button" data-close aria-label="Close reveal" type="button">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        </div>
+      </div>
+    </div>
+  <div class="large-6 columns">
+    <!--- Left side of page with search option and todays weather and forecast at bottom-->      
+      <div class="large-6 columns">
+        <div class="today-box" data-position="bottom" data-alignment="left">
+          <h4>
+            <span>Today's Weather</span>
+          </h4>
+          <div class="weather-img" id='todayWeatherIcon'></div>
+          <div class="weather"></div>
+            <span id="temperature"></span>
+            <span id="conditions"></span>
+        </div>
+      </div>
+      <div class="large-6 columns">
+        <div class="forecast-box">
+          <h4>
+            Forecast
+          </h4>
+          <div id='forecastDiv'></div>
+
             <button class="button" data-open="park-modal" id="narrow-data">Next</button>
             <button class="close-button" data-close aria-label="Close reveal" type="button">
               <span aria-hidden="true">&times;</span>
@@ -121,6 +159,7 @@
 
 
 <footer>
+
 </footer>
     
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
