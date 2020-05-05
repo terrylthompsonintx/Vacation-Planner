@@ -717,10 +717,19 @@ var getStates = function() {
    }
    var theStates = theArray.filter(distinct);
    theStates = theStates.sort();
-   
+
+   var divRow = document.createElement("div");
+   divRow.classList = "row align-justify";
+   stateRadio.append(divRow);
    //console.log(theStates.sort());
    for (var i = 0; i < theStates.length; i++)
    {
+      
+      if (i % 8 === 0) {
+         var newColumn = document.createElement("div");
+         newColumn.classList = "columns ";
+         divRow.append(newColumn);
+      }
       var theRadio = document.createElement("input");
       theRadio.setAttribute("type", "radio");
       theRadio.setAttribute("name", "state");
@@ -732,13 +741,15 @@ var getStates = function() {
       theLabel.innerHTML = theStates[i];
       theLabel.classList = "";
       
-      stateRadio.append(theRadio);
-      stateRadio.append(theLabel);
+      newColumn.append(theRadio);
+      newColumn.append(theLabel);
    }
 }
 
 var pullParksByState = function(state) {
-   var theState = "CA";
+   // clear the list of parks from the secondary modal
+   clearCurrent();
+   var theState = state;
    var theList = [];
    for (var i = 0; i < parkList.length; i++) {
       //console.log(parkList[i].states);
@@ -755,24 +766,27 @@ var pullParksByState = function(state) {
    for (var i = 0; i < theParks.length; i++) {
       var splitParks = theParks[i].split("*");
       
+      var divParks = document.createElement("div");
+      divParks.setAttribute("id", "parkList");
+      parkModal.append(divParks);
       var theButton = document.createElement("input");
       theButton.setAttribute("type", "button");
       theButton.setAttribute("name", splitParks[1]);
       theButton.setAttribute("value", splitParks[0]);
       theButton.setAttribute("onClick", "getPark('" + splitParks[1] + "');");
       theButton.innerHTML = splitParks[0];
-      theButton.classList = "";
-      parkModal.append(theButton);
-      var theBreak = document.createElement("br");
-      parkModal.append(theBreak);
+      theButton.classList = "button small expanded ";
+      divParks.append(theButton);
+      //var theBreak = document.createElement("br");
+      //divParks.append(theBreak);
       
    }
 }
 
-var displayButton = function(button) {
-   console.log(button);
-}
+var clearCurrent = function() {
+   $("#parkList").empty();
+ }
 
-pullParksByState();
+//pullParksByState();
 //getFullNameParkCode();
 getStates();
