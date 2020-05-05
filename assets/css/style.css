@@ -46,3 +46,6 @@ body {
     overflow-x: scroll;
    }
 
+.today-box {
+    color: var(--seneary-color);
+}
