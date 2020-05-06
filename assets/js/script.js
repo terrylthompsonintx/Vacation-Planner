@@ -6,6 +6,9 @@ var divToDos = document.getElementById("info-box-to-do");
 var divParkDescription = document.getElementById("parkDescription");
 var weatherApiKey =  '7f0033f9d596986b6d7fb538906b14a7';
 
+var alertDiv = document.querySelector('#alertList');
+
+
 // add current day at top of calendar
 (function() {
     var now = moment().format('dddd, MMMM Do');
@@ -137,9 +140,39 @@ var divRightSide = document.getElementById("right-side");
 
 var campGroundDiv = document.getElementById("campgroundInfo");
 
+var displayAlerts = function(alertObj){
+    console.log(alertObj);
+    clearDiv(alertDiv);
+    if (alertObj.data.length == 0){
+        var noAlerts = document.createElement('h4')
+        noAlerts.innerText="No Alerts found.";
+        alertDiv.appendChild(noAlerts);
+    }else {
+        for (var x = 0; x < alertObj.data.length; x++){
+        var alertUl = document.createElement('ul');
+        alertUl.className='campUl';
+        var alertli = document.createElement('li');
+        var alertName = document.createElement('h5');
+        alertName.innerText=alertObj.data[x].title;
+        alertli.appendChild(alertName);
+        alertUl.appendChild(alertli);
+        var alertdesrcli = document.createElement('li');
+        alertdesrcli.innerText = alertObj.data[x].description;
+        alertUl.appendChild(alertdesrcli);
+
+        alertDiv.appendChild(alertUl);
+        var seperator  = document.createElement('hr');
+        alertDiv.appendChild(seperator);
+        }
+    }
+
+}
+
+
 var displayCampGround =function(campObj){
-    campGroundDiv.innerHTML='';
-    console.log(campObj);
+    clearDiv(campGroundDiv);
+    
+    //console.log(campObj);
     if (campObj.data.length == 0){
         var noInfo = document.createElement('h4')
         noInfo.innerText="No campground information available.";
@@ -150,7 +183,7 @@ var displayCampGround =function(campObj){
             var campul =document.createElement('ul');
             campul.className='campUl';
             var campNameLi = document.createElement('li');
-            var campName = document.createElement('h4');
+            var campName = document.createElement('h5');
             campName.innerText=campObj.data[i].name;
             campNameLi.appendChild(campName);
             campul.appendChild(campNameLi);
@@ -179,8 +212,12 @@ var displayCampGround =function(campObj){
             campRes.appendChild(liLink);
             
             campul.appendChild(campRes);
+            
+
 
             }
+            var seperator  = document.createElement('hr');
+            campGroundDiv.appendChild(seperator);
         }
 
     }
@@ -364,9 +401,27 @@ var getPark = function(parkCode) {
                   });
            }
         });
+        var alertUrl = "https://developer.nps.gov/api/v1/alerts?" + parkCode + "&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo";
+        fetch(alertUrl)
+        .then(function(response) {
+            if (response.ok) {
+               response.json()
+                   .then(function(data2) {
+                       
+                       displayAlerts(data2);
+                   });
+            }
+         });
+            
+        
+           
 
 }
 
+/*var alertUrl = "https://developer.nps.gov/api/v1/alerts?" + parkCode + "&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo";
+var alertFetch - function(){
+
+}*/
 
 /*****
  * this was being used with the Next button on the state-modal
