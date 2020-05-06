@@ -2,6 +2,7 @@ var todayTemp = document.querySelector('#temperature'); //icon of todays weather
 var todayConditions = document.querySelector('#conditions');//todays conditions
 var forecast = document.querySelector('#forecastDiv'); //forecast
 var todayImage = document.querySelector('#todayWeatherIcon');
+var divToDos = document.getElementById("info-box-to-do");
 var weatherApiKey =  '7f0033f9d596986b6d7fb538906b12a7';
 
 // add current day at top of calendar
@@ -247,10 +248,7 @@ var getPark = function(parkCode) {
 
                         // only create the info-box if there is something to display
                         if (natParks.activities.length > 0) {
-                            var divToDos = document.createElement("div");
-                            divToDos.setAttribute("id","info-box-todos");
-                            divToDos.classList = "info-box";
-                            divRightSide.append(divToDos);
+                            clearDiv(divToDos);
                             var h4ElToDo = document.createElement("h4");
                             divToDos.append(h4ElToDo);
                             var spanToDo = document.createElement("span");
@@ -274,6 +272,16 @@ var getPark = function(parkCode) {
                                 divColumn.textContent = natParks.activities[i].name;
                                 divRow.append(divColumn);
                             }
+                        } else {
+                            clearDiv(divToDos);
+                            h4ElToDo = document.createElement("h4");
+                            h4ElToDo.innerHTML = "Things To Do";
+                            divToDos.append(h4ElToDo);
+                            nestTodo = document.createElement("div");
+                            nestTodo.id = "todos";
+                            nestTodo.classList = "events-nest";
+                            nestTodo.innerHTML = "There are no activities being returned by the server.";
+                            divToDos.append(nestTodo);
                         }
                     });
             }
