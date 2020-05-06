@@ -19,7 +19,7 @@
 <!-- HEADER -->
 <header>
     <div class="grid-container">
-          <div class="large-12 cell text-center">git ch
+          <div class="large-12 cell text-center">
                 <h1>Vacation Planner</h1>
         </div>
       </div>
@@ -36,6 +36,7 @@
         <div id="state-modal" class="reveal rounded" id="state-modal" data-reveal>
           <h2>Select State</h2>
             <button id="choose-state" class="button rounded" data-open="park-modal">Next</button>
+            <!--  <button class="button" data-open="park-modal">Next</button> -->
             <button class="close-button" data-close aria-label="Close reveal" type="button">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -44,7 +45,7 @@
         <!-- Second Modal -->
         <div class="reveal" id="park-modal" data-reveal>
           <h2>Select Park</h2>
-            <button class="button" type="submit" id="data-submit">Submit</button>
+            <!-- <button class="button" type="submit" id="data-submit">Submit</button> -->
             <button class="close-button" data-close aria-label="Close reveal" type="button">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -86,7 +87,7 @@
   <!-- End of left side-->
 
   <!-- Start of right side-->
-  <div class="large-6 columns">
+  <div class="large-6 columns" id="right-side">
     <div class="today-date" id="today">
     </div>
     <!-- Start of Activities-->
@@ -119,6 +120,17 @@
       </h4>
       <div class="events-nest"> 
               <br> <i class="fi-alert"></i> 
+      </div>
+  </div>
+  </div>
+  <!-- Start of To Do-->
+<div class="info-box" id="info-box-to-do">
+  <div class="border-rounded" id="to-do">
+      <h4>
+        <span>Things To Do</span>
+      </h4>
+      <div class="events-nest"> 
+              <br> <i class=""></i> 
       </div>
   </div>
   </div>
