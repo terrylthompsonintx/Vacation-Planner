@@ -820,6 +820,5 @@ var clearCurrent = function(div) {
    }
  }
 
-//pullParksByState();
-//getFullNameParkCode();
+
 getStates();
