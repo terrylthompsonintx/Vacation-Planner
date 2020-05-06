@@ -145,7 +145,7 @@ var getPark = function(parkCode) {
 
     // clear out the list of parks on next pull
     clearCurrent("#parkList");
-    clearCurrent("#todos");
+    removeTodos();
 
     
     fetch(parkURL)
@@ -213,7 +213,7 @@ var getPark = function(parkCode) {
                             divToDos.append(nestTodo);
                             //console.log(natParks.activities.length);
                             var divRow = document.createElement("div");
-                            divRow.classList = "expanded row";
+                            divRow.classList = "row";
                             divToDos.append(divRow);
                             for (var i = 0; i < natParks.activities.length; i++) {
                                 var divColumn = document.createElement("div");

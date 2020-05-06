@@ -813,9 +813,11 @@ var clearCurrent = function(div) {
    $(div).empty();
  }
 
- var removeElement = function(elementID) {
-    var element = document.getElementById(elementID);
-    element.parentNode.removeChild(element);
+ var removeTodos = function() {
+   var myobj = document.getElementById("info-box-todos");
+   if (myobj !== null) {
+      myobj.remove();
+   }
  }
 
 //pullParksByState();
