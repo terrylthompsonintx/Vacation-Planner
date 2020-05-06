@@ -1,3 +1,4 @@
+  
 :root {
 --primary-color: #5085A5;
 --secondary-color: #31708E;
@@ -33,7 +34,8 @@ body {
 
 .forecast-box {
     background-color: var(--quaternary-color);
-    opacity: .2;
+    opacity: .9;
+    color: white;
 }
 
 .info-box {

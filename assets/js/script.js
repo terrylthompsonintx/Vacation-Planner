@@ -125,7 +125,7 @@ var fetchWeather =function(lat, lon){
 $(document).foundation();
 
 // Variables
-var campgroundURL = "https://developer.nps.gov/api/v1/campgrounds?parkCode=bibe&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo"
+// var campgroundURL = "https://developer.nps.gov/api/v1/campgrounds?parkCode=bibe&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo"
 var natParks = [];
 var writeLine = "";
 var eventEl = document.getElementById("info-box-activities");
@@ -137,6 +137,7 @@ var campGroundDiv = document.getElementById("campgroundInfo");
 
 var displayCampGround =function(campObj){
     campGroundDiv.innerHTML='';
+    console.log(campObj);
     if (campObj.data.length == 0){
         var noInfo = document.createElement('h4')
         noInfo.innerText="No campground information available.";
@@ -292,14 +293,13 @@ var getPark = function(parkCode) {
                     });
             }
         });
-   campgroundfetch = 'https://developer.nps.gov/api/v1/campgrounds?parkCode=' + parkCode + '&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo';
-   fetch(campgroundfetch)
+   var name = "https://developer.nps.gov/api/v1/campgrounds?parkCode=" + parkCode + "&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo";
+   fetch(name)
         .then(function(response) {
            if (response.ok) {
               response.json()
                   .then(function(data2) {
-                      displayCampGround(data2);
-                     console.log(data2);
+                     displayCampGround(data2);
                   });
            }
         });
