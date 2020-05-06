@@ -123,6 +123,7 @@ var fetchWeather =function(lat, lon){
 }
 
 $(document).foundation();
+
 // Variables
 var campgroundURL = "https://developer.nps.gov/api/v1/campgrounds?parkCode=bibe&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo"
 var natParks = [];
@@ -130,73 +131,101 @@ var writeLine = "";
 var eventEl = document.getElementById("info-box-activities");
 var stateModal = document.getElementById("choose-state");
 var chosenState = document.getElementsByName("state");
-var campGroundDiv = document.getElementById("campgroundInfo");
-
-var displayCampGround =function(campObj){
-    campGroundDiv.innerHTML='';
-    if (campObj.data.length == 0){
-        var noInfo = document.createElement('h4')
-        noInfo.innerText="No campground information available.";
-        campGroundDiv.appendChild(noInfo);
-    }else {
-        
-        for (var i=0; i < campObj.data.length; i++){
-            var campul =document.createElement('ul');
-            campul.className='campUl';
-            var campNameLi = document.createElement('li');
-            var campName = document.createElement('h4');
-            campName.innerText=campObj.data[i].name;
-            campNameLi.appendChild(campName);
-            campul.appendChild(campNameLi);
-            campGroundDiv.appendChild(campul);
-            var campdesc = document.createElement('li');
-            campdesc.innerText = campObj.data[i].description;
-            campul.appendChild(campdesc);
-            var campfee = document.createElement('li');
-            campfee.innerText= "Fees: " + campObj.data[i].fees[0].cost;
-            campul.appendChild(campfee);
-            console.log(campObj.data[i].reservationsurl)
-            var campRes = document.createElement('li')
-            if (campObj.data[i].reservationsurl == '' ){
-                campRes.innerText = 'Reservation Link: Not available.';
-                campul.appendChild(campRes);
-            }
-            else{
-            var campRes = document.createElement('li');
-              
-            var liLink = document.createElement('a');
-            var link = document.createTextNode("Reservation");
-            liLink.appendChild(link);
-            
-            liLink.href = campObj.data[i].reservationsurl;
-            liLink.setAttribute('target', "_blank");
-            campRes.appendChild(liLink);
-            
-            campul.appendChild(campRes);
+var divRightSide = document.getElementById("right-side");
 
 
-            }
-        }
-
-    }
-}
 var getPark = function(parkCode) {
     var parkURL = "https://developer.nps.gov/api/v1/parks?parkCode="+ parkCode +"&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo&limit=500";
 
+    // force the park list closed
     $('#park-modal').foundation('close');
+
+    // before we get the park info, start the pull for the weather
+    checkLatLon(parkCode);
+
+    // clear out the list of parks on next pull
+    clearCurrent("#parkList");
+    removeTodos();
+
     
     fetch(parkURL)
         .then(function(response) {
             if (response.ok) {
                 response.json()
                     .then(function(data) {
-                        natParks = data.data;
-                        console.log(data.data[0].images[0].url);
-                        var theBody = document.getElementsByTagName("body");
-                        //theBody.style = "background-image: url(" + data.data[0].images[0].url + ") no-repeat center center fixed;";
-                        $('body').css("background-image", "url(" + data.data[0].images[0].url + ")");
-                        //var theHeader = document.getElementsByTagName("header");
-                        //theHeader.style = "background-image: url(" + data.data[0].images[0].url +");";
+                        natParks = data.data[0];
+                        
+                        // use one of the supplied background images to display a picture of the park
+                        $('body').css("background-image", "linear-gradient(to right, rgba(80,133,165,0.5), rgba(80,133,165,0.8)), url(" + data.data[0].images[0].url + ")");
+
+                        /******************
+                         * use the natParks object to create an entry and display a list of activities
+                         * ****************/
+
+
+                        //console.log(natParks);
+                        // gather the park information for display purposes (place in console.log tags right now)
+                        console.log(natParks.fullName);
+                        if (natParks.addresses.length > 0) {
+                            for (var i = 0; i < natParks.addresses.length; i++) {
+                                if (natParks.addresses[i].type === "Physical") {
+                                    console.log(natParks.addresses[i].line1);
+                                    if (natParks.addresses[i].line2) {
+                                        console.log(natParks.addresses[i].line2);
+                                    }
+                                    if (natParks.addresses[i].line3 !== "") {
+                                        console.log(natParks.addresses[i].line3);
+                                    }
+                                    console.log(natParks.addresses[i].city);
+                                    console.log(natParks.addresses[i].stateCode);
+                                    console.log(natParks.addresses[i].postalCode);
+                                }
+                            }
+                        }
+                        
+                        if (natParks.contacts.phoneNumbers.length > 0) {
+                            for (var i = 0; i < natParks.contacts.phoneNumbers.length; i++) {
+                                if (natParks.contacts.phoneNumbers[i].type === "Voice") {
+                                    console.log(natParks.contacts.phoneNumbers[i].phoneNumber);
+                                }
+                            }
+                        }
+                        if (natParks.url !== "") {
+                            console.log(natParks.url);
+                        }
+                        console.log(natParks.weatherInfo);
+                        console.log(natParks.description);
+
+                        // only create the info-box if there is something to display
+                        if (natParks.activities.length > 0) {
+                            var divToDos = document.createElement("div");
+                            divToDos.setAttribute("id","info-box-todos");
+                            divToDos.classList = "info-box";
+                            divRightSide.append(divToDos);
+                            var h4ElToDo = document.createElement("h4");
+                            divToDos.append(h4ElToDo);
+                            var spanToDo = document.createElement("span");
+                            spanToDo.innerHTML = "Things To Do";
+                            h4ElToDo.append(spanToDo);
+                            var nestTodo = document.createElement("div");
+                            nestTodo.id = "todos";
+                            nestTodo.classList = "events-nest";
+                            divToDos.append(nestTodo);
+                            //console.log(natParks.activities.length);
+                            var divRow = document.createElement("div");
+                            divRow.classList = "row";
+                            divToDos.append(divRow);
+                            for (var i = 0; i < natParks.activities.length; i++) {
+                                var divColumn = document.createElement("div");
+                                if (i+1 === natParks.activities.length) {
+                                    divColumn.classList = "columns small-6 end";
+                                } else {
+                                    divColumn.classList = "columns small-6";
+                                }
+                                divColumn.textContent = natParks.activities[i].name;
+                                divRow.append(divColumn);
+                            }
+                        }
                     });
             }
         });
@@ -208,31 +237,31 @@ var getPark = function(parkCode) {
             if (response.ok) {
                 response.json()
                     .then(function(data) {
-                        console.log(data.total);
+                        //console.log(data.total);
                         if (data.total === '0') {
                             document.querySelector(".fi-mountains").innerHTML = "There are no events planned at this time."
                         }
                     });
             }
         });
-   campgroundfetch = 'https://developer.nps.gov/api/v1/campgrounds?parkCode=' + parkCode + '&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo';
-   fetch(campgroundfetch)
+/*      
+   fetch(campgroundURL)
         .then(function(response) {
            if (response.ok) {
               response.json()
                   .then(function(data2) {
-                      displayCampGround(data2);
                      console.log(data2);
                   });
            }
         });
-
+*/
 }
 
 
 
 
 var stateModalHandler = function(event) {
+
     // cycle through all of the states and ...
     for (var i = 0; i < chosenState.length; i++) {
         // find out which one is maked and then...
