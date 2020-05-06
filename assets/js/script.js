@@ -220,6 +220,7 @@ var getPark = function(parkCode) {
                         // gather the park information for display purposes
                         clearDiv(divParkDescription);
                         divParkDescription.classList = "callout rounded";
+                        //divParkDescription.classList = "info-box";
 
                         var h4El = document.createElement("h4");
                         h4El.innerHTML = natParks.fullName;
