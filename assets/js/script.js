@@ -3,7 +3,8 @@ var todayConditions = document.querySelector('#conditions');//todays conditions
 var forecast = document.querySelector('#forecastDiv'); //forecast
 var todayImage = document.querySelector('#todayWeatherIcon');
 var divToDos = document.getElementById("info-box-to-do");
-var weatherApiKey =  '7f0033f9d596986b6d7fb538906b12a7';
+var divParkDescription = document.getElementById("parkDescription");
+var weatherApiKey =  '7f0033f9d596986b6d7fb538906b14a7';
 
 // add current day at top of calendar
 (function() {
@@ -22,7 +23,7 @@ var clearDiv =function(targetDiv){
 
 //creates URL from weather object
 var iconUrl = function(code){
-    var icode=code + '@2x.png';
+    var icode=code + '@4x.png';
     var urlstring = 'https://openweathermap.org/img/wn/' + icode;
     return(urlstring);
 }
@@ -82,7 +83,7 @@ var displayWeather  = function(weatherObj){
 var fetchLatLon = function (zipC){
     
 
-    var endpointurl = "https://api.openweathermap.org/data/2.5/forecast?zip=" +zipC+"&appid="+weatherApiKey;
+    var endpointurl = "https://api.openweathermap.org/data/4.5/forecast?zip=" +zipC+"&appid="+weatherApiKey;
 
     
     fetch(endpointurl)
@@ -104,7 +105,7 @@ var fetchWeather =function(lat, lon){
     
     var parkLat =lat;
     var parkLon = lon;
-    var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?";
+    var weatherApiUrl = "https://api.openweathermap.org/data/4.5/onecall?";
     
     var weatherQ = '';
     
@@ -206,29 +207,66 @@ var getPark = function(parkCode) {
                         natParks = data.data[0];
                         
                         // use one of the supplied background images to display a picture of the park
-                        $('body').css("background-image", "linear-gradient(to right, rgba(80,133,165,0.5), rgba(80,133,165,0.8)), url(" + data.data[0].images[0].url + ")");
-
+                        if (natParks.images.length > 0) {
+                            $('body').css("background-image", "linear-gradient(to right, rgba(80,133,165,0.5), rgba(80,133,165,0.8)), url(" + data.data[0].images[0].url + ")");
+                        }
                         /******************
                          * use the natParks object to create an entry and display a list of activities
                          * ****************/
-
+                        
+                        // clear the current parkDescription div
 
                         //console.log(natParks);
-                        // gather the park information for display purposes (place in console.log tags right now)
-                        console.log(natParks.fullName);
+                        // gather the park information for display purposes
+                        clearDiv(divParkDescription);
+                        divParkDescription.classList = "callout rounded";
+
+                        var h4El = document.createElement("h4");
+                        h4El.innerHTML = natParks.fullName;
+                        divParkDescription.append(h4El);
+                        //console.log(natParks.fullName);
                         if (natParks.addresses.length > 0) {
                             for (var i = 0; i < natParks.addresses.length; i++) {
                                 if (natParks.addresses[i].type === "Physical") {
-                                    console.log(natParks.addresses[i].line1);
-                                    if (natParks.addresses[i].line2) {
-                                        console.log(natParks.addresses[i].line2);
+                                    var address1 = document.createElement("div");
+                                    address1.classList = "";
+                                    address1.textContent = natParks.addresses[i].line1;
+                                    divParkDescription.append(address1);
+                                    //console.log(natParks.addresses[i].line1);
+                                    // there might not be an address 2, so check
+                                    if (natParks.addresses[i].line2 !== "") {
+                                        var address2 = document.createElement("div");
+                                        address2.classList = "";
+                                        address2.textContent = natParks.addresses[i].line2;
+                                        divParkDescription.append(address2);
+                                        // console.log(natParks.addresses[i].line4);
                                     }
                                     if (natParks.addresses[i].line3 !== "") {
-                                        console.log(natParks.addresses[i].line3);
+                                        var address3 = document.createElement("div");
+                                        address3.classList = "";
+                                        address3.textContent = natParks.addresses[i].line3;
+                                        divParkDescription.append(address3);
+                                        // console.log(natParks.addresses[i].line3);
                                     }
-                                    console.log(natParks.addresses[i].city);
-                                    console.log(natParks.addresses[i].stateCode);
-                                    console.log(natParks.addresses[i].postalCode);
+                                    var postalInfo = document.createElement("div");
+                                    postalInfo.id = "cityStateZip";
+                                    postalInfo.classList = "";
+                                    divParkDescription.append(postalInfo);
+                                    var parkCity = document.createElement("span");
+                                    parkCity.classList = "";
+                                    parkCity.textContent = natParks.addresses[i].city + ", ";
+                                    postalInfo.append(parkCity);
+                                    //console.log(natParks.addresses[i].city);
+                                    var parkState = document.createElement("span");
+                                    parkState.classList = "";
+                                    parkState.textContent = natParks.addresses[i].stateCode + " ";
+                                    postalInfo.append(parkState);
+                                    //console.log(natParks.addresses[i].stateCode);
+                                    var postZip = document.createElement("span");
+                                    postZip.classList = "";
+                                    postZip.textContent = natParks.addresses[i].postalCode;
+                                    postalInfo.append(postZip);
+                                    //console.log(natParks.addresses[i].postalCode);
                                 }
                             }
                         }
@@ -236,13 +274,27 @@ var getPark = function(parkCode) {
                         if (natParks.contacts.phoneNumbers.length > 0) {
                             for (var i = 0; i < natParks.contacts.phoneNumbers.length; i++) {
                                 if (natParks.contacts.phoneNumbers[i].type === "Voice") {
-                                    console.log(natParks.contacts.phoneNumbers[i].phoneNumber);
+                                    var divPhoneNum = document.createElement("div");
+                                    divPhoneNum.classList = "";
+                                    divPhoneNum.textContent = "Phone: " + natParks.contacts.phoneNumbers[i].phoneNumber;
+                                    divParkDescription.append(divPhoneNum);
+                                    //console.log(natParks.contacts.phoneNumbers[i].phoneNumber);
                                 }
                             }
                         }
                         if (natParks.url !== "") {
-                            console.log(natParks.url);
+                            var divURL = document.createElement("div");
+                            divParkDescription.append(divURL);
+                            //console.log(natParks.url);
+                            var aLink = document.createElement("a")
+                            aLink.classList = "button";
+                            aLink.href = natParks.url;
+                            aLink.target = "_blank";
+                            aLink.innerHTML = "Park Website";
+                            divURL.append(aLink);
                         }
+                        //console.log(natParks.url);
+
                         console.log(natParks.weatherInfo);
                         console.log(natParks.description);
 
@@ -306,8 +358,8 @@ var getPark = function(parkCode) {
         .then(function(response) {
            if (response.ok) {
               response.json()
-                  .then(function(data2) {
-                     displayCampGround(data2);
+                  .then(function(data4) {
+                     displayCampGround(data4);
                   });
            }
         });
@@ -315,8 +367,12 @@ var getPark = function(parkCode) {
 }
 
 
+/*****
+ * this was being used with the Next button on the state-modal
+ *   it is being commented out for removal later
+ */
 
-
+/*
 var stateModalHandler = function(event) {
     removeDiv(document.getElementById("parks"));
     // cycle through all of the states and ...
@@ -328,7 +384,7 @@ var stateModalHandler = function(event) {
         }
     }
 }
+*/
 
-//getPark();
 // listen to the 'Next' button on the stateModal form and fire stateModalHandler
-stateModal.addEventListener("click", stateModalHandler);
+//stateModal.addEventListener("click", stateModalHandler);
