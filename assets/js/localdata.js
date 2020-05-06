@@ -748,27 +748,29 @@ var getStates = function() {
 
 var pullParksByState = function(state) {
    // clear the list of parks from the secondary modal
-   clearCurrent();
+   clearCurrent("#parkList");
    var theState = state;
    var theList = [];
    for (var i = 0; i < parkList.length; i++) {
-      //console.log(parkList[i].states);
+      // check to see if the state exists in the list of states for big parks
       if (parkList[i].states.indexOf(theState) != -1) {
-         //console.log(parkList[i]);
-         //theList.push(parkList[i].parkCode + "*" + parkList[i].fullname);
+         // create an asterisk delimited array to hold the fullname and parkCode
          theList.push(parkList[i].fullname + "*" + parkList[i].parkCode);
       }
    }
-   //console.log(theParks);
+   // filter the parks by just that state and only return unique values
    var theParks = theList.filter(distinct);
+
+   // since the parks could be out of order, go ahead and sort them by the full name
    theParks = theParks.sort();
-   //console.log(theParks);
+
+   var divParks = document.createElement("div");
+   divParks.setAttribute("id", "parkList");
+   parkModal.append(divParks);
+   // go through the list of parks and set up the buttons
    for (var i = 0; i < theParks.length; i++) {
       var splitParks = theParks[i].split("*");
       
-      var divParks = document.createElement("div");
-      divParks.setAttribute("id", "parkList");
-      parkModal.append(divParks);
       var theButton = document.createElement("input");
       theButton.setAttribute("type", "button");
       theButton.setAttribute("name", splitParks[1]);
@@ -783,10 +785,40 @@ var pullParksByState = function(state) {
    }
 }
 
-var clearCurrent = function() {
-   $("#parkList").empty();
+//  create a search function to loop through the array to pull back the park object
+var search = function(parkKey, parkList) {
+   for (var i = 0; i < parkList.length; i++) {
+      if (parkList[i].parkCode === parkKey) {
+         return parkList[i];
+      }
+   }
+}
+
+// function to check to see if the lat/lon exists on our local file
+var checkLatLon = function(parkCode) {
+   var thePark = search(parkCode, parkList);
+   var theLat = thePark.latitude;
+   var theLon = thePark.longitude;
+   var theZip = thePark.postalCode;
+
+   if (theLat === "" || theLon === "") {
+      fetchLatLon(theZip);
+   } else {
+      fetchWeather(theLat, theLon);
+   }
+}
+
+// this clears the id = parkList on the HTML page
+var clearCurrent = function(div) {
+   $(div).empty();
  }
 
-//pullParksByState();
-//getFullNameParkCode();
+ var removeTodos = function() {
+   var myobj = document.getElementById("info-box-todos");
+   if (myobj !== null) {
+      myobj.remove();
+   }
+ }
+
+
 getStates();
