@@ -4,7 +4,7 @@ var forecast = document.querySelector('#forecastDiv'); //forecast
 var todayImage = document.querySelector('#todayWeatherIcon');
 var divToDos = document.getElementById("info-box-to-do");
 var divParkDescription = document.getElementById("parkDescription");
-var weatherApiKey =  '7f0033f9d596986b6d7fb538906b14a7';
+var weatherApiKey =  '7f0033f9d596986b6d7fb538906b12a7';
 
 var alertDiv = document.querySelector('#alertList');
 
@@ -26,7 +26,7 @@ var clearDiv =function(targetDiv){
 
 //creates URL from weather object
 var iconUrl = function(code){
-    var icode=code + '@4x.png';
+    var icode=code + '@2x.png';
     var urlstring = 'https://openweathermap.org/img/wn/' + icode;
     return(urlstring);
 }
@@ -86,7 +86,7 @@ var displayWeather  = function(weatherObj){
 var fetchLatLon = function (zipC){
     
 
-    var endpointurl = "https://api.openweathermap.org/data/4.5/forecast?zip=" +zipC+"&appid="+weatherApiKey;
+    var endpointurl = "https://api.openweathermap.org/data/2.5/forecast?zip=" +zipC+"&appid="+weatherApiKey;
 
     
     fetch(endpointurl)
@@ -108,7 +108,7 @@ var fetchWeather =function(lat, lon){
     
     var parkLat =lat;
     var parkLon = lon;
-    var weatherApiUrl = "https://api.openweathermap.org/data/4.5/onecall?";
+    var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?";
     
     var weatherQ = '';
     
