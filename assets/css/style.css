@@ -58,3 +58,7 @@ body {
 .today-box {
     color: var(--seneary-color);
 }
+
+.menu {
+    border-radius: 25px;
+}

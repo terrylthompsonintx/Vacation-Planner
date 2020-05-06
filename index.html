@@ -29,8 +29,18 @@
 <div class="row" style="margin-top: 20px">
 <!-- Row with drop down for search/modal-->
   <div class="grid-container">
-    <div class="small-12 cell">
-      <button class="button" data-open="state-modal" id="search-button">Find Your Park</button>
+    <div class="columns">
+      <ul class="dropdown menu" data-dropdown-menu>
+        <li id="search-history">
+          <button class="button" data-open="state-modal" id="search-button">Find Your Park</button>
+          <ul class="menu">
+            <li><a href=""></a></li>
+            <li>
+              <a href=""></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
        
         <!-- First Modal -->
         <div id="state-modal" class="reveal rounded" id="state-modal" data-reveal>
