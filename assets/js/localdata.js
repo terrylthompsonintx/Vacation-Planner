@@ -721,34 +721,30 @@ var getStates = function() {
    var divRow = document.createElement("div");
    divRow.classList = "row align-justify";
    stateRadio.append(divRow);
-   //console.log(theStates.sort());
+   var btnGroup = document.createElement("div");
+   btnGroup.classList = "button-group expanded";
+   divRow.append(btnGroup);
    for (var i = 0; i < theStates.length; i++)
    {
-      
-      if (i % 8 === 0) {
-         var newColumn = document.createElement("div");
-         newColumn.classList = "columns ";
-         divRow.append(newColumn);
+      if ((i + 1) % 6 === 0) {
+         var btnGroup = document.createElement("div");
+         btnGroup.classList = "button-group expanded";
+         divRow.append(btnGroup);
       }
-      var theRadio = document.createElement("input");
-      theRadio.setAttribute("type", "radio");
-      theRadio.setAttribute("name", "state");
-      theRadio.setAttribute("id", theStates[i]);
-      theRadio.setAttribute("value", theStates[i]);
-      theRadio.classList = "";
-      var theLabel = document.createElement("label");
-      theLabel.setAttribute("for", theStates[i]);
-      theLabel.innerHTML = theStates[i];
-      theLabel.classList = "";
-      
-      newColumn.append(theRadio);
-      newColumn.append(theLabel);
+      var newLink = document.createElement("a");
+      newLink.classList = "button";
+      newLink.innerHTML = theStates[i];
+      newLink.setAttribute("onClick", "pullParksByState('" + theStates[i] + "')");
+      btnGroup.append(newLink);
    }
 }
 
 var pullParksByState = function(state) {
+   // trigger the modals to take appropriate actions
+   $('#state-modal').foundation('close');
+   $('#park-modal').foundation('open');
    // clear the list of parks from the secondary modal
-   clearCurrent("#parkList");
+   removeDiv(document.getElementById("parks"));
    var theState = state;
    var theList = [];
    for (var i = 0; i < parkList.length; i++) {
@@ -765,8 +761,12 @@ var pullParksByState = function(state) {
    theParks = theParks.sort();
 
    var divParks = document.createElement("div");
-   divParks.setAttribute("id", "parkList");
+   divParks.id = "parks";
    parkModal.append(divParks);
+
+   var divParkList = document.createElement("div");
+   divParkList.setAttribute("id", "parkList");
+   divParks.append(divParkList);
    // go through the list of parks and set up the buttons
    for (var i = 0; i < theParks.length; i++) {
       var splitParks = theParks[i].split("*");
@@ -778,11 +778,12 @@ var pullParksByState = function(state) {
       theButton.setAttribute("onClick", "getPark('" + splitParks[1] + "');");
       theButton.innerHTML = splitParks[0];
       theButton.classList = "button small expanded ";
-      divParks.append(theButton);
+      divParkList.append(theButton);
       //var theBreak = document.createElement("br");
-      //divParks.append(theBreak);
+      //divParkList.append(theBreak);
       
    }
+
 }
 
 //  create a search function to loop through the array to pull back the park object
@@ -813,8 +814,7 @@ var clearCurrent = function(div) {
    $(div).empty();
  }
 
- var removeTodos = function() {
-   var myobj = document.getElementById("info-box-todos");
+ var removeDiv = function(myobj) {
    if (myobj !== null) {
       myobj.remove();
    }

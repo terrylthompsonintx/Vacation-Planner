@@ -50,9 +50,19 @@ body {
     margin: 20px;
     overflow-y: scroll;
    }
+.info-box ul{
+    list-style-type:none;
+}
+.info-box hr{
+    border-top: 2px solid black ;
+}
 
 .today-box {
     color: var(--seneary-color);
+}
+
+.rounded {
+    border-radius: 25px;
 }
 
 @media screen and (max-width: 39.9375em) {
@@ -60,3 +70,4 @@ body {
         width: 100%;
     }
 }
+
