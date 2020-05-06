@@ -41,8 +41,10 @@ body {
 .info-box {
     background-color: var(--tertiary-color);
     color: var(--seneary-color);
-    padding: 15px; 
+    padding: 15px;
+    @media screen and (max-width: 39.9375em) { 
     width: 500px;
+    }
     height: 125px;   
     border-radius: 25px; 
     margin: 20px;
@@ -59,6 +61,13 @@ body {
     color: var(--seneary-color);
 }
 
-.menu {
+.rounded {
     border-radius: 25px;
 }
+
+@media screen and (max-width: 39.9375em) {
+    #search-button {
+        width: 100%;
+    }
+}
+
