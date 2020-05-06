@@ -48,6 +48,12 @@ body {
     margin: 20px;
     overflow-y: scroll;
    }
+.info-box ul{
+    list-style-type:none;
+}
+.info-box hr{
+    border-top: 2px solid black ;
+}
 
 .today-box {
     color: var(--seneary-color);
