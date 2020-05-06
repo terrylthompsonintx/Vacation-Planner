@@ -765,8 +765,12 @@ var pullParksByState = function(state) {
    theParks = theParks.sort();
 
    var divParks = document.createElement("div");
-   divParks.setAttribute("id", "parkList");
+   divParks.id = "parks";
    parkModal.append(divParks);
+
+   var divParkList = document.createElement("div");
+   divParkList.setAttribute("id", "parkList");
+   divParks.append(divParkList);
    // go through the list of parks and set up the buttons
    for (var i = 0; i < theParks.length; i++) {
       var splitParks = theParks[i].split("*");
@@ -778,11 +782,12 @@ var pullParksByState = function(state) {
       theButton.setAttribute("onClick", "getPark('" + splitParks[1] + "');");
       theButton.innerHTML = splitParks[0];
       theButton.classList = "button small expanded ";
-      divParks.append(theButton);
+      divParkList.append(theButton);
       //var theBreak = document.createElement("br");
-      //divParks.append(theBreak);
+      //divParkList.append(theBreak);
       
    }
+
 }
 
 //  create a search function to loop through the array to pull back the park object
@@ -813,8 +818,8 @@ var clearCurrent = function(div) {
    $(div).empty();
  }
 
- var removeTodos = function() {
-   var myobj = document.getElementById("info-box-todos");
+ var removeDiv = function(myobj) {
+   //var myobj = document.getElementById("info-box-todos");
    if (myobj !== null) {
       myobj.remove();
    }

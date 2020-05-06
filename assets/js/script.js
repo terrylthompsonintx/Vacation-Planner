@@ -194,8 +194,8 @@ var getPark = function(parkCode) {
     checkLatLon(parkCode);
 
     // clear out the list of parks on next pull
-    clearCurrent("#parkList");
-    removeTodos();
+    removeDiv(document.getElementById("parks"));
+    removeDiv(document.getElementById("todos"));
 
     
     fetch(parkURL)
@@ -318,10 +318,10 @@ var getPark = function(parkCode) {
 
 
 var stateModalHandler = function(event) {
-
+    removeDiv(document.getElementById("parks"));
     // cycle through all of the states and ...
     for (var i = 0; i < chosenState.length; i++) {
-        // find out which one is maked and then...
+        // find out which one is marked and then...
         if (chosenState[i].checked) {
             // run the pullParksByState routine to populate the next modal
             pullParksByState(chosenState[i].value);
