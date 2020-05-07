@@ -698,6 +698,32 @@ var parkList = [
    {'fullname': 'Yellowstone National Park', 'states': 'ID,MT,WY', 'parkCode': 'yell', 'longitude': '-110.5471695', 'latitude': '44.59824417', 'postalCode': '82190'},
 ]
 
+var searchHistory = [];
+
+var storeHistory = function(parkName, parkC){
+   //limit array to two items.  
+   var newobject ={Name: parkName, code: parkC};
+   //console.log(newobject);
+   if (searchHistory== null){
+      searchHistory =[];
+      searchHistory.push(newobject);
+   }else{
+      searchHistory.push(newobject);
+   }
+   if (searchHistory.length>=3){
+      searchHistory.shift();
+   }
+   localStorage.setItem('searches',JSON.stringify(searchHistory));
+}
+var getHistory = function(){
+   searchHistory = JSON.parse(localStorage.getItem("searches"));
+   if (searchHistory== null){
+      searchHistory =[];
+   }
+  console.log(searchHistory) ;
+
+
+}
 var getFullNameParkCode = function() {
    for (var i = 0; i < parkList.length; i++) {
       console.log(parkList[i].fullname + " = " + parkList[i].parkCode);
@@ -777,6 +803,7 @@ var pullParksByState = function(state) {
       theButton.setAttribute("value", splitParks[0]);
       theButton.setAttribute("onClick", "getPark('" + splitParks[1] + "');");
       theButton.innerHTML = splitParks[0];
+      storeHistory(splitParks[0], splitParks[1]);
       theButton.classList = "button small expanded ";
       divParkList.append(theButton);
       //var theBreak = document.createElement("br");

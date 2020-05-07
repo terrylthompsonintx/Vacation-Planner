@@ -4,7 +4,7 @@ var forecast = document.querySelector('#forecastDiv'); //forecast
 var todayImage = document.querySelector('#todayWeatherIcon');
 var divToDos = document.getElementById("info-box-to-do");
 var divParkDescription = document.getElementById("parkDescription");
-var weatherApiKey =  '7f0033f9d596986b6d7fb538906b14a7';
+var weatherApiKey =  '7f0033f9d596986b6d7fb538906b12a7';
 
 var alertDiv = document.querySelector('#alertList');
 
@@ -26,7 +26,7 @@ var clearDiv =function(targetDiv){
 
 //creates URL from weather object
 var iconUrl = function(code){
-    var icode=code + '@4x.png';
+    var icode=code + '@2x.png';
     var urlstring = 'https://openweathermap.org/img/wn/' + icode;
     return(urlstring);
 }
@@ -86,7 +86,7 @@ var displayWeather  = function(weatherObj){
 var fetchLatLon = function (zipC){
     
 
-    var endpointurl = "https://api.openweathermap.org/data/4.5/forecast?zip=" +zipC+"&appid="+weatherApiKey;
+    var endpointurl = "https://api.openweathermap.org/data/2.5/forecast?zip=" +zipC+"&appid="+weatherApiKey;
 
     
     fetch(endpointurl)
@@ -108,7 +108,7 @@ var fetchWeather =function(lat, lon){
     
     var parkLat =lat;
     var parkLon = lon;
-    var weatherApiUrl = "https://api.openweathermap.org/data/4.5/onecall?";
+    var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?";
     
     var weatherQ = '';
     
@@ -167,7 +167,10 @@ var displayAlerts = function(alertObj){
     }
 
 }
-
+//The NPS Events API is undergoing revision.  Uncomment this for future use.
+/*var displayEvents= function(eventObj){
+    console.log ('events', eventObj );
+}*/
 
 var displayCampGround =function(campObj){
     clearDiv(campGroundDiv);
@@ -175,7 +178,7 @@ var displayCampGround =function(campObj){
     //console.log(campObj);
     if (campObj.data.length == 0){
         var noInfo = document.createElement('h4')
-        noInfo.innerText="No campground information available.";
+        noInfo.innerText="There are no campgrounds in this park.";
         campGroundDiv.appendChild(noInfo);
     }else {
         
@@ -378,19 +381,18 @@ var getPark = function(parkCode) {
         });
         
 
-    var eventURL = "https://developer.nps.gov/api/v1/events?ParkCode=" + parkCode + "&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo";
+    /*var eventURL = "https://developer.nps.gov/api/v1/events?ParkCode=" + parkCode + "&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo&dateEnd=2020-12-30";
     fetch(eventURL)
         .then(function(response) {
             if (response.ok) {
                 response.json()
                     .then(function(data) {
-                        //console.log(data.total);
-                        if (data.total === '0') {
-                            document.querySelector(".fi-mountains").innerHTML = "There are no events planned at this time."
-                        }
+                        
+                            displayEvents(data);
+                        
                     });
             }
-        });
+        });*/
    var name = "https://developer.nps.gov/api/v1/campgrounds?parkCode=" + parkCode + "&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo";
    fetch(name)
         .then(function(response) {
@@ -401,6 +403,7 @@ var getPark = function(parkCode) {
                   });
            }
         });
+        console.log(parkCode);
         var alertUrl = "https://developer.nps.gov/api/v1/alerts?" + parkCode + "&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo";
         fetch(alertUrl)
         .then(function(response) {
