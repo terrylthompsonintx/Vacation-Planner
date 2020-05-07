@@ -167,7 +167,10 @@ var displayAlerts = function(alertObj){
     }
 
 }
-
+//The NPS Events API is undergoing revision.  Uncomment this for future use.
+/*var displayEvents= function(eventObj){
+    console.log ('events', eventObj );
+}*/
 
 var displayCampGround =function(campObj){
     clearDiv(campGroundDiv);
@@ -175,7 +178,7 @@ var displayCampGround =function(campObj){
     //console.log(campObj);
     if (campObj.data.length == 0){
         var noInfo = document.createElement('h4')
-        noInfo.innerText="No campground information available.";
+        noInfo.innerText="There are no campgrounds in this park.";
         campGroundDiv.appendChild(noInfo);
     }else {
         
@@ -251,13 +254,19 @@ var getPark = function(parkCode) {
                          * use the natParks object to create an entry and display a list of activities
                          * ****************/
                         
-                        // clear the current parkDescription div
+                        // save the search information to localStorage
+                        
+                        storeHistory(natParks.fullName, parkCode);
+                                
+
+
+                        clearDiv(subMenu);
+                        getHistory();
 
                         //console.log(natParks);
                         // gather the park information for display purposes
                         clearDiv(divParkDescription);
                         divParkDescription.classList = "callout rounded";
-                        //divParkDescription.classList = "info-box";
 
                         var h4El = document.createElement("h4");
                         h4El.innerHTML = natParks.fullName;
@@ -378,19 +387,18 @@ var getPark = function(parkCode) {
         });
         
 
-    var eventURL = "https://developer.nps.gov/api/v1/events?ParkCode=" + parkCode + "&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo";
+    /*var eventURL = "https://developer.nps.gov/api/v1/events?ParkCode=" + parkCode + "&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo&dateEnd=2020-12-30";
     fetch(eventURL)
         .then(function(response) {
             if (response.ok) {
                 response.json()
                     .then(function(data) {
-                        //console.log(data.total);
-                        if (data.total === '0') {
-                            document.querySelector(".fi-mountains").innerHTML = "There are no events planned at this time."
-                        }
+                        
+                            displayEvents(data);
+                        
                     });
             }
-        });
+        });*/
    var name = "https://developer.nps.gov/api/v1/campgrounds?parkCode=" + parkCode + "&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo";
    fetch(name)
         .then(function(response) {
@@ -401,7 +409,8 @@ var getPark = function(parkCode) {
                   });
            }
         });
-        var alertUrl = "https://developer.nps.gov/api/v1/alerts?" + parkCode + "&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo";
+        console.log(parkCode);
+        var alertUrl = "https://developer.nps.gov/api/v1/alerts?parkCode=" + parkCode + "&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo";
         fetch(alertUrl)
         .then(function(response) {
             if (response.ok) {

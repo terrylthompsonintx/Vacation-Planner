@@ -64,6 +64,17 @@ body {
     color: var(--seneary-color);
 }
 
+.callout {
+    background-color: var(--tertiary-color);
+    color: var(--seneary-color);
+}
+
+.unrounded {
+    background-color: var(--quinary-color);
+    padding: 10px;
+    color: white;
+}
+
 .rounded {
     border-radius: 25px;
 }

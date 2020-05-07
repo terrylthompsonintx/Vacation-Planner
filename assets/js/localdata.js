@@ -1,6 +1,7 @@
 var fullNameCode = [];
 var stateRadio = document.getElementById("state-modal");
 var parkModal = document.getElementById("park-modal");
+var subMenu = document.getElementById("submenu");
 
 var parkList = [
    {'fullname': 'Birmingham Civil Rights National Monument', 'states': 'AL', 'parkCode': 'bicr', 'longitude': '-86.8146667480469', 'latitude': '33.5154266357422', 'postalCode': '0'},
@@ -698,17 +699,76 @@ var parkList = [
    {'fullname': 'Yellowstone National Park', 'states': 'ID,MT,WY', 'parkCode': 'yell', 'longitude': '-110.5471695', 'latitude': '44.59824417', 'postalCode': '82190'},
 ]
 
+var searchHistory = [];
+
+var storeHistory = function(parkName, parkC){
+   var x = false; // variable that will allow me to test if the parkCode exists
+   searchHistory = JSON.parse(localStorage.getItem("searches"));
+   
+   const found = searchHistory.some(el => el.code === parkC);
+   if (!found) {
+      //limit array to two items.  
+      var newobject ={Name: parkName, code: parkC};
+      if (searchHistory== null){
+         searchHistory =[];
+         searchHistory.push(newobject);
+      }else{
+         searchHistory.push(newobject);
+      }
+      if (searchHistory.length>=3){
+         searchHistory.shift();
+      }
+      localStorage.setItem('searches',JSON.stringify(searchHistory));
+   }
+
+
+
+
+/*   
+   //console.log(newobject);
+
+*/
+}
+
+// pull the information of last two searches from localStorage
+var getHistory = function(){
+   searchHistory = JSON.parse(localStorage.getItem("searches"));
+   if (searchHistory== null){
+      searchHistory =[];
+   }
+
+   // if there is any data in the searchHistory array, display it
+   if (searchHistory.length > 0) {
+
+      for (var i = searchHistory.length - 1; i >= 0; i--) {
+         var histLI = document.createElement("li");
+         histLI.id = "histItem" + [i];
+         subMenu.append(histLI);
+         var aHist = document.createElement("a");
+         aHist.classList = "unrounded";
+         aHist.style = "text-decoration: none;"
+         aHist.innerHTML = searchHistory[i].Name;
+         aHist.setAttribute("onClick", "getPark('" + searchHistory[i].code + "');");
+         subMenu.append(aHist);
+      }
+   }
+}
+
+// function to get the fullname and parkcode
 var getFullNameParkCode = function() {
    for (var i = 0; i < parkList.length; i++) {
       console.log(parkList[i].fullname + " = " + parkList[i].parkCode);
    }
 }
 
+// This allows me to get unique values in an array of multiple copies
 const distinct = (value, index, self) => {
    return self.indexOf(value) === index;
 }
 
+// run this in the beginning to populate the states from the parkList array
 var getStates = function() {
+   getHistory();
    var theArray = [];
    for (var i = 0; i < parkList.length; i++) {
       if (parkList[i].states.length < 3) {
@@ -777,6 +837,7 @@ var pullParksByState = function(state) {
       theButton.setAttribute("value", splitParks[0]);
       theButton.setAttribute("onClick", "getPark('" + splitParks[1] + "');");
       theButton.innerHTML = splitParks[0];
+      //storeHistory(splitParks[0], splitParks[1]);  -- moved this line to getParks in script.js ~line 257
       theButton.classList = "button small expanded ";
       divParkList.append(theButton);
       //var theBreak = document.createElement("br");
