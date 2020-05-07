@@ -254,13 +254,19 @@ var getPark = function(parkCode) {
                          * use the natParks object to create an entry and display a list of activities
                          * ****************/
                         
-                        // clear the current parkDescription div
+                        // save the search information to localStorage
+                        
+                        storeHistory(natParks.fullName, parkCode);
+                                
+
+
+                        clearDiv(subMenu);
+                        getHistory();
 
                         //console.log(natParks);
                         // gather the park information for display purposes
                         clearDiv(divParkDescription);
                         divParkDescription.classList = "callout rounded";
-                        //divParkDescription.classList = "info-box";
 
                         var h4El = document.createElement("h4");
                         h4El.innerHTML = natParks.fullName;
@@ -404,7 +410,7 @@ var getPark = function(parkCode) {
            }
         });
         console.log(parkCode);
-        var alertUrl = "https://developer.nps.gov/api/v1/alerts?" + parkCode + "&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo";
+        var alertUrl = "https://developer.nps.gov/api/v1/alerts?parkCode=" + parkCode + "&api_key=VJ0LDmOeUdXZOUVYzYzkBagof6QaIk44zhLQ4jMo";
         fetch(alertUrl)
         .then(function(response) {
             if (response.ok) {
