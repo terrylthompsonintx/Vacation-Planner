@@ -705,21 +705,22 @@ var storeHistory = function(parkName, parkC){
    var x = false; // variable that will allow me to test if the parkCode exists
    searchHistory = JSON.parse(localStorage.getItem("searches"));
    
-   const found = searchHistory.some(el => el.code === parkC);
-   if (!found) {
-      //limit array to two items.  
+   
+      //limit array to two its.  
       var newobject ={Name: parkName, code: parkC};
       if (searchHistory== null){
          searchHistory =[];
          searchHistory.push(newobject);
       }else{
+         const found = searchHistory.some(el => el.code === parkC);
+         if (!found) {
          searchHistory.push(newobject);
+         }
       }
       if (searchHistory.length>=3){
          searchHistory.shift();
       }
       localStorage.setItem('searches',JSON.stringify(searchHistory));
-   }
 
 
 
