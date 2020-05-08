@@ -145,7 +145,7 @@ var displayAlerts = function(alertObj){
     clearDiv(alertDiv);
     if (alertObj.data.length == 0){
         var noAlerts = document.createElement('h4')
-        noAlerts.innerText="No Alerts found.";
+        noAlerts.innerText="No alerts found.";
         alertDiv.appendChild(noAlerts);
     }else {
         for (var x = 0; x < alertObj.data.length; x++){
