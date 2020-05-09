@@ -7,8 +7,8 @@
 
     <title>National Park Trip Planner</title>
 
-    <link rel="stylesheet" href="assets/css/foundation-icons/foundation-icons.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
+
+   
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-float.min.css" integrity="sha256-4ldVyEvC86/kae2IBWw+eJrTiwNEbUUTmN0zkP4luL4=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.1.1/motion-ui.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
@@ -20,24 +20,22 @@
 <header>
     <div class="grid-container">
           <div class="large-12 cell text-center">
-                <h1>Vacation Planner</h1>
+            <img src="assets/images/logo.png" alt="logo" />
+                <h1></h1>
         </div>
       </div>
 </header>
 
 <!-- Begin Page Content -->
-<div class="row" style="margin-top: 20px">
+
+<div class="large-12 cell text-center" style="margin-top: 20px; margin-bottom: 15px">
 <!-- Row with drop down for search/modal-->
-  <div class="grid-container">
-    <div class="columns">
+
       <ul class="dropdown menu" data-dropdown-menu>
         <li id="search-history">
-          <button class="button" data-open="state-modal" id="search-button">Find Your Park</button>
+          <button class="button large" data-open="state-modal" id="search-button">Find Your Park</button>
           <ul class="menu" id="submenu">
- <!--           <li><a href=""></a></li>
-            <li>
-              <a href=""></a>
-            </li>-->
+
           </ul>
         </li>
       </ul>
@@ -60,14 +58,14 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        </div>
-      </div>
+       
     </div>
-  <div class="large-6 columns">
 
+  
+<div class="large-6 columns"
     <!--- Left side of page with search option and todays weather and forecast at bottom-->      
       <div class="large-6 columns">
-        <div class="today-box" data-position="bottom" data-alignment="left">
+        <div class="today-box text-center" data-position="bottom" data-alignment="left">
           <h4>
             <span>Today's Park Weather</span>
           </h4>
@@ -78,7 +76,7 @@
             <span id="temperature"></span>
             <span id="conditions"></span>
         </div>
-                <div class="forecast-box">
+        <div class="forecast-box text-center">
           <h4>
             Park Forecast
           </h4>
@@ -93,7 +91,7 @@
         </div>
 
         </div>
-      </div>
+</div>
   </div>
   <!-- End of left side-->
 

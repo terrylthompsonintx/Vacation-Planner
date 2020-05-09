@@ -25,7 +25,7 @@ var parkList = [
    {'fullname': 'Denali National Park & Preserve', 'states': 'AK', 'parkCode': 'dena', 'longitude': '-151.0526568', 'latitude': '63.29777484', 'postalCode': '99755'},
    {'fullname': 'Gates Of The Arctic National Park & Preserve', 'states': 'AK', 'parkCode': 'gaar', 'longitude': '-153.2917758', 'latitude': '67.75961636', 'postalCode': '99701'},
    {'fullname': 'Glacier Bay National Park & Preserve', 'states': 'AK', 'parkCode': 'glba', 'longitude': '-136.8407579', 'latitude': '58.80086718', 'postalCode': '99826'},
-   {'fullname': 'I&#241;upiat Heritage Center', 'states': 'AK', 'parkCode': 'inup', 'longitude': '-156.7529136', 'latitude': '71.29889155', 'postalCode': '99723'},
+   {'fullname': 'Iñupiat Heritage Center', 'states': 'AK', 'parkCode': 'inup', 'longitude': '-156.7529136', 'latitude': '71.29889155', 'postalCode': '99723'},
    {'fullname': 'Katmai National Park & Preserve', 'states': 'AK', 'parkCode': 'katm', 'longitude': '-155.0126574', 'latitude': '58.62235668', 'postalCode': '99613'},
    {'fullname': 'Kenai Fjords National Park', 'states': 'AK', 'parkCode': 'kefj', 'longitude': '-150.106502', 'latitude': '59.81804414', 'postalCode': '99664'},
    {'fullname': 'Klondike Gold Rush National Historical Park', 'states': 'AK', 'parkCode': 'klgo', 'longitude': '-135.2618535', 'latitude': '59.61042373', 'postalCode': '99840'},
@@ -192,13 +192,13 @@ var parkList = [
    {'fullname': 'Trail Of Tears National Historic Trail', 'states': 'AL,AR,GA,IL,KY,MO,NC,OK,TN', 'parkCode': 'trte', 'longitude': '', 'latitude': '', 'postalCode': '87504'},
    {'fullname': 'War In The Pacific National Historical Park', 'states': 'GU', 'parkCode': 'wapa', 'longitude': '144.6922461', 'latitude': '13.43795691', 'postalCode': '96910'},
    {'fullname': 'Ala Kahakai National Historic Trail', 'states': 'HI', 'parkCode': 'alka', 'longitude': '', 'latitude': '', 'postalCode': '96740'},
-   {'fullname': 'Haleakal&#257; National Park', 'states': 'HI', 'parkCode': 'hale', 'longitude': '-156.1591775', 'latitude': '20.70693015', 'postalCode': '96768'},
+   {'fullname': 'Haleakalā National Park', 'states': 'HI', 'parkCode': 'hale', 'longitude': '-156.1591775', 'latitude': '20.70693015', 'postalCode': '96768'},
    {'fullname': 'Hawai\'i Volcanoes National Park', 'states': 'HI', 'parkCode': 'havo', 'longitude': '-155.4700257', 'latitude': '19.3355036', 'postalCode': '96718'},
    {'fullname': 'Honouliuli National Historic Site', 'states': 'HI', 'parkCode': 'hono', 'longitude': '-158.0574991', 'latitude': '21.38817536', 'postalCode': '96818'},
    {'fullname': 'Kalaupapa National Historical Park', 'states': 'HI', 'parkCode': 'kala', 'longitude': '-156.9511609', 'latitude': '21.1731108', 'postalCode': '96742'},
-   {'fullname': 'Kaloko-Honok&#333;hau National Historical Park', 'states': 'HI', 'parkCode': 'kaho', 'longitude': '-156.0306932', 'latitude': '19.68083237', 'postalCode': '96740'},
+   {'fullname': 'Kaloko-Honokōhau National Historical Park', 'states': 'HI', 'parkCode': 'kaho', 'longitude': '-156.0306932', 'latitude': '19.68083237', 'postalCode': '96740'},
    {'fullname': 'Pearl Harbor National Memorial', 'states': 'HI', 'parkCode': 'valr', 'longitude': '-157.938578897697', 'latitude': '21.3670699388264', 'postalCode': '96818'},
-   {'fullname': 'Pu`ukohol&#257; Heiau National Historic Site', 'states': 'HI', 'parkCode': 'puhe', 'longitude': '-155.8211629', 'latitude': '20.02772186', 'postalCode': '96743'},
+   {'fullname': 'Pu`ukoholā Heiau National Historic Site', 'states': 'HI', 'parkCode': 'puhe', 'longitude': '-155.8211629', 'latitude': '20.02772186', 'postalCode': '96743'},
    {'fullname': 'Puʻuhonua o Hōnaunau National Historical Park', 'states': 'HI', 'parkCode': 'puho', 'longitude': '-155.9008789', 'latitude': '19.41268627', 'postalCode': '96726'},
    {'fullname': 'California National Historic Trail', 'states': 'CA,CO,ID,KS,MO,NE,NV,OR,UT,WY', 'parkCode': 'cali', 'longitude': '', 'latitude': '', 'postalCode': '87501'},
    {'fullname': 'City Of Rocks National Reserve', 'states': 'ID', 'parkCode': 'ciro', 'longitude': '-113.7124097', 'latitude': '42.0699024', 'postalCode': '83312'},
@@ -746,7 +746,7 @@ var getHistory = function(){
          histLI.id = "histItem" + [i];
          subMenu.append(histLI);
          var aHist = document.createElement("a");
-         aHist.classList = "unrounded";
+         aHist.classList = "rounded";
          aHist.style = "text-decoration: none;"
          aHist.innerHTML = searchHistory[i].Name;
          aHist.setAttribute("onClick", "getPark('" + searchHistory[i].code + "');");
